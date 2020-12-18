@@ -3,10 +3,7 @@ import React, { Fragment } from 'react';
 import Task from './Task';
 
 const TasksList = ({ project }) => {
-  console.log(project);
-  console.log(project.tasksList);
   const tasksList = project.tasksList;
-  console.log(tasksList);
 
   return (
     <Fragment>
@@ -20,6 +17,10 @@ const TasksList = ({ project }) => {
           tasksList.map((task, index) => <Task key={index} task={task} />)
         )}
       </ul>
+
+      <button type='button' className='btn btn-eliminar'>
+        Remove Project &times;
+      </button>
     </Fragment>
   );
 };
