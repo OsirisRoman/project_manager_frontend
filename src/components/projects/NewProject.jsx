@@ -7,11 +7,13 @@ const NewProject = () => {
   const {
     showNewProjectForm,
     changeShowNewProjectFormState,
+    addProject,
   } = contextOfNewProject;
 
   //Project State
   const [project, setProject] = useState({
     name: '',
+    tasksList: [],
   });
 
   const onChangeForm = (e) => {
@@ -30,7 +32,11 @@ const NewProject = () => {
       return;
     }
 
-    console.log(project);
+    //Add the project to the context state
+    addProject(project);
+
+    //Reset the new project form
+    setProject({ ...project, name: '' });
   };
 
   return (

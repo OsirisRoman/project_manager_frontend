@@ -1,23 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import Sidebar from '../layout/Sidebar';
 import Navbar from '../layout/Navbar';
 import TaskForm from '../tasks/TaskForm';
 import TasksList from '../tasks/TasksList';
 
+import ProjectContext from '../../context/projects/projectContext';
+
 const Projects = () => {
-  //Projects and its task
-  const projects = [
-    {
-      name: 'Ecommerce',
-      tasksList: [
-        { name: 'Choose Platform', state: true },
-        { name: 'Choose Colors', state: false },
-        { name: 'Choose Payment Platform', state: false },
-        { name: 'Choose Hosting', state: true },
-      ],
-    },
-  ];
+  //Extracting project from context state
+  const contextOfProjects = useContext(ProjectContext);
+  const { projectTasks } = contextOfProjects;
+
   return (
     <div className='contenedor-app'>
       <Sidebar />
@@ -28,9 +22,11 @@ const Projects = () => {
         <main>
           <TaskForm />
           <div className='contenedor-tareas'>
-            {projects.map((project, index) => (
-              <TasksList key={index} project={project} />
-            ))}
+            {Object.keys(projectTasks).length === 0 ? (
+              <div> There is not a selected project </div>
+            ) : (
+              <TasksList key={projectTasks.id} project={projectTasks} />
+            )}
           </div>
         </main>
       </div>

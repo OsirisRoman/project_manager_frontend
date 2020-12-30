@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 
 import NewProject from '../projects/NewProject';
 import ProjectsList from '../projects/ProjectsList';
+import ProjectContext from '../../context/projects/projectContext';
 
 const Sidebar = () => {
-  //List Of Projects
-  const listOfProjects = [
-    { name: 'Ecommerce' },
-    { name: 'Intranet' },
-    { name: 'Website Mockup' },
-  ];
+  //Extracting project from context state
+  const contextOfProjects = useContext(ProjectContext);
+  const { projects, getProjects } = contextOfProjects;
+
+  useEffect(() => {
+    getProjects();
+  }, []);
+
+  //Check if there are projects
+  const zeroProjects = projects.length === 0;
+
   return (
     <aside>
       <h1>
@@ -20,8 +26,11 @@ const Sidebar = () => {
 
       <div className='proyectos'>
         <h2>Your Projects</h2>
-
-        <ProjectsList listOfProjects={listOfProjects} />
+        {zeroProjects ? (
+          <div> There are no Projects </div>
+        ) : (
+          <ProjectsList listOfProjects={projects} />
+        )}
       </div>
     </aside>
   );
