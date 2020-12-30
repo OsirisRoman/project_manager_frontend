@@ -16,6 +16,9 @@ const NewProject = () => {
     tasksList: [],
   });
 
+  //Error State
+  const [error, setError] = useState(false);
+
   const onChangeForm = (e) => {
     setProject({
       ...project,
@@ -28,9 +31,12 @@ const NewProject = () => {
 
     //Validate the project name form field
     if (project.name === '') {
-      console.log('the project name can not be empty');
+      setError(true);
       return;
     }
+
+    //change error state value
+    setError(false);
 
     //Add the project to the context state
     addProject(project);
@@ -63,6 +69,10 @@ const NewProject = () => {
             value='Add New Project'
           />
         </form>
+      ) : null}
+
+      {error ? (
+        <p className='mensaje error'>Se requiere un nombre para el Proyecto</p>
       ) : null}
     </Fragment>
   );
