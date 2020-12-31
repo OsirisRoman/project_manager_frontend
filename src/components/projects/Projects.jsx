@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { Fragment, useContext } from 'react';
 
 import Sidebar from '../layout/Sidebar';
 import Navbar from '../layout/Navbar';
@@ -20,14 +20,19 @@ const Projects = () => {
         <Navbar />
 
         <main>
-          <TaskForm />
-          <div className='contenedor-tareas'>
-            {Object.keys(projectTasks).length === 0 ? (
-              <div> There is not a selected project </div>
-            ) : (
-              <TasksList key={projectTasks.id} project={projectTasks} />
-            )}
-          </div>
+          {Object.keys(projectTasks).length === 0 ? (
+            <div className='contenedor-tareas'>
+              {' '}
+              There is not a selected project{' '}
+            </div>
+          ) : (
+            <Fragment>
+              <TaskForm />
+              <div className='contenedor-tareas'>
+                <TasksList key={projectTasks.id} project={projectTasks} />
+              </div>
+            </Fragment>
+          )}
         </main>
       </div>
     </div>
