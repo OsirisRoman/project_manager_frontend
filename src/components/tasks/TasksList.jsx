@@ -1,9 +1,14 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 
 import Task from './Task';
 
+import projectContext from '../../context/projects/projectContext';
+
 const TasksList = ({ project }) => {
   const tasksList = project.tasksList;
+
+  const contextState = useContext(projectContext);
+  const { removeProject } = contextState;
 
   return (
     <Fragment>
@@ -18,7 +23,10 @@ const TasksList = ({ project }) => {
         )}
       </ul>
 
-      <button type='button' className='btn btn-eliminar'>
+      <button
+        type='button'
+        className='btn btn-eliminar'
+        onClick={() => removeProject(project.id)}>
         Remove Project &times;
       </button>
     </Fragment>

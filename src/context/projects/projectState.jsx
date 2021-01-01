@@ -9,7 +9,8 @@ import {
   CREATE_NEW_PROJECT,
   GET_PROJECTS,
   ADD_NEW_PROJECT,
-  GET_PROJECT_TASKS,
+  GET_ACTUAL_PROJECT_TASKS,
+  REMOVE_PROJECT,
 } from '../../types';
 
 const ProjectState = (props) => {
@@ -46,7 +47,7 @@ const ProjectState = (props) => {
     //Projects and its task
     projects: [],
     showNewProjectForm: false,
-    projectTasks: {},
+    actualProject: {},
   };
 
   //Dispatch to run actions
@@ -67,9 +68,9 @@ const ProjectState = (props) => {
   };
 
   //Get task from a selected project
-  const getProjectTasks = (project) => {
+  const getActualProjectTasks = (project) => {
     dispatch({
-      type: GET_PROJECT_TASKS,
+      type: GET_ACTUAL_PROJECT_TASKS,
       payload: project,
     });
   };
@@ -83,16 +84,25 @@ const ProjectState = (props) => {
     });
   };
 
+  //Remove a given project
+  const removeProject = (projectId) => {
+    dispatch({
+      type: REMOVE_PROJECT,
+      payload: projectId,
+    });
+  };
+
   return (
     <projectContext.Provider
       value={{
         showNewProjectForm: state.showNewProjectForm,
         projects: state.projects,
-        projectTasks: state.projectTasks,
+        actualProject: state.actualProject,
         changeShowNewProjectFormState,
         getProjects,
         addProject,
-        getProjectTasks,
+        getActualProjectTasks,
+        removeProject,
       }}>
       {props.children}
     </projectContext.Provider>

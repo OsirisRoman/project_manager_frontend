@@ -27,7 +27,7 @@ const Sidebar = () => {
       <div className='proyectos'>
         <h2>Your Projects</h2>
         {zeroProjects ? (
-          <div> There are no Projects </div>
+          <div> There are no Projects, you can start creating one. </div>
         ) : (
           <ProjectsList listOfProjects={projects} />
         )}

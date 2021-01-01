@@ -10,7 +10,7 @@ import ProjectContext from '../../context/projects/projectContext';
 const Projects = () => {
   //Extracting project from context state
   const contextOfProjects = useContext(ProjectContext);
-  const { projectTasks } = contextOfProjects;
+  const { actualProject } = contextOfProjects;
 
   return (
     <div className='contenedor-app'>
@@ -20,16 +20,16 @@ const Projects = () => {
         <Navbar />
 
         <main>
-          {Object.keys(projectTasks).length === 0 ? (
-            <div className='contenedor-tareas'>
+          {Object.keys(actualProject).length === 0 ? (
+            <h2 className='contenedor-tareas'>
               {' '}
-              There is not a selected project{' '}
-            </div>
+              There is not a selected project, please Select a Project{' '}
+            </h2>
           ) : (
             <Fragment>
               <TaskForm />
               <div className='contenedor-tareas'>
-                <TasksList key={projectTasks.id} project={projectTasks} />
+                <TasksList key={actualProject.id} project={actualProject} />
               </div>
             </Fragment>
           )}

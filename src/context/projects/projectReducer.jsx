@@ -2,7 +2,8 @@ import {
   CREATE_NEW_PROJECT,
   GET_PROJECTS,
   ADD_NEW_PROJECT,
-  GET_PROJECT_TASKS,
+  GET_ACTUAL_PROJECT_TASKS,
+  REMOVE_PROJECT,
 } from '../../types';
 
 export default (state, action) => {
@@ -23,10 +24,18 @@ export default (state, action) => {
         projects: [...state.projects, action.payload],
         showNewProjectForm: false,
       };
-    case GET_PROJECT_TASKS:
+    case GET_ACTUAL_PROJECT_TASKS:
       return {
         ...state,
-        projectTasks: action.payload,
+        actualProject: action.payload,
+      };
+    case REMOVE_PROJECT:
+      return {
+        ...state,
+        projects: state.projects.filter(
+          (project) => project.id !== action.payload
+        ),
+        actualProject: {},
       };
     default:
       return state;
